@@ -5,24 +5,17 @@ const int N = 100;
 
 class Stack
 {
-    int stk[N];     // Array to store stack elements
-    int t;          // Top index
+    int arr[N]; 
+    int top;    
 
 public:
     Stack()
     {
-        t = -1;
+        top = -1;
     }
     bool Full()
     {
-        if(t == N-1)
-            return true;
-        else
-            return false;
-    }
-    bool empty()
-    {
-        if(t == -1)
+        if (top == N - 1)
             return true;
         else
             return false;
@@ -32,21 +25,30 @@ public:
         if (Full())
         {
             cout << "Cannot push: Stack overflow" << endl;
+            return;
         }
+
+        top++;
+        arr[top] = x;
+    }
+    bool empty()
+    {
+        if (top == -1)
+            return true;
         else
-        {
-            t++;
-            stk[t] = x;
-        }
+            return false;
     }
     void pop()
     {
         if (empty())
+        {
             cout << "Cannot pop: Stack underflow" << endl;
-        else
-            t--; 
+            return;
+        }
+
+        top--;
     }
-    int top()
+    int TOP()
     {
         if (empty())
         {
@@ -54,14 +56,16 @@ public:
             return -1;
         }
         else
-            return stk[t];
+            return arr[top];
     }
 };
 int main()
 {
     Stack s;
-    int n = 5, x;
-    
+    int n, x;
+    cout << "enter size: ";
+    cin >> n;
+
     cout << "Enter elements to push onto the stack: ";
     for (int i = 0; i < n; i++)
     {
@@ -72,7 +76,7 @@ int main()
     cout << "Popping elements from the stack:" << endl;
     while (!s.empty())
     {
-        cout << s.top() << " ";
+        cout << s.TOP() << " ";
         s.pop();
     }
 

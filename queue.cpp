@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-const int n = 5; // Queue size
+const int n = 50;
 
 class Queue
 {
@@ -14,59 +14,48 @@ public:
         Front = -1;
         rear = -1;
     }
-
-    bool Isfll()
+    bool fill()
     {
         if (rear == n-1)
             return true;
         else
             return false;
     }
+    void Insert(int x)
+    {
+        if (fill())
+        {
+            cout << "Cannot insert: Queue is full" << endl;
+            return;
+        }
+        if (Front == -1)    // only once. for fist element
+            Front++;
+        
+        rear++;
+        myqueue[rear] = x;
+    }
 
-    bool Isempty()
+    bool empty()
     {
         if (Front == -1 || Front > rear)
             return true;
         else
             return false;
     }
-
-    void Insert(int x)
-    {
-        if (Isfll())
-        {
-            cout << "Cannot insert: Queue is full" << endl;
-            return;
-        }
-        if (Front == -1)    // If queue is empty, initialize Front to 0
-            Front = 0;
-        
-        rear++;
-        myqueue[rear] = x;
-    }
-
     void Delete()
     {
-        if (Isempty())
+        if (empty())
         {
             cout << "Cannot delete: Queue is empty" << endl;
             return;
         }
 
-        int item = myqueue[Front];
-        cout << "Deleted item: " << item << endl;
-
         Front++;
-        if (Front > rear)   // Reset the queue when all elements are deleted
-        { 
-            Front = -1;
-            rear = -1;
-        }
     }
 
     void display()
     {
-        if (Isempty())
+        if (empty())
         {
             cout << "Queue is empty" << endl;
             return;
@@ -83,18 +72,20 @@ public:
 int main()
 {
     Queue m;
-    int n = 5,x;
+
+    int n,x;
+    cout<<"enter size: ";
+    cin>>n;
     cout<<"enter elements: ";
-    while(n--)
+    for(int i=0; i<n; i++)
     {
         cin>>x;
         m.Insert(x);
     }
+
     m.display();
-    m.Delete();
-    m.Delete();
+    m.Delete(); 
     m.display();
-    
 
     return 0;
 }

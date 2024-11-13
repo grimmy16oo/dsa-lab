@@ -3,37 +3,39 @@ using namespace std;
 
 void merging(int arr[], int l, int mid, int r)
 {
-    int n1 = mid - l + 1;
-    int n2 = r - mid;
+    int n1 = mid-l+1;
+    int n2 = r-mid;
 
     int a[n1], b[n2];
 
     // Copy data to temp arrays a[] and b[]
-    for (int i = 0; i < n1; i++)
+    for (int i=0; i<n1; i++)
     {
-        a[i] = arr[l + i];
+        a[i] = arr[l+i];      // (arr, l, mid)
     }
-    for (int i = 0; i < n2; i++)
+    for (int i=0; i<n2; i++)
     {
-        b[i] = arr[mid + 1 + i];
+        b[i] = arr[mid+1+i];    //(arr, mid+1, r);
     }
 
-    int i = 0, j = 0, k = l;
+    int i=0, j=0, k=l;
 
     // Merge the temp arrays back into arr[l..r]
-    while (i < n1 && j < n2)
+    while (i<n1 && j<n2)
     {
         if (a[i] <= b[j])
         {
             arr[k] = a[i];
             i++;
+            k++;
         }
         else
         {
             arr[k] = b[j];
             j++;
+            k++;
         }
-        k++;
+        
     }
 
     // Copy the remaining elements of a[], if any

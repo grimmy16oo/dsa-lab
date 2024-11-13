@@ -15,10 +15,10 @@ int main()
 
     for(int i=0; i<n-1; i++)
     {
-        int loc = i, Min = arr[i];
+        int Min = arr[i],loc = i;
         for(int j=i+1; j<n; j++)
         {
-            if(arr[j] < arr[i])
+            if(arr[j] < Min)
             {
                 Min = arr[j];
                 loc = j;
